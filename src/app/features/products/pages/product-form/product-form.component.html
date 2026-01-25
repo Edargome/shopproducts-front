@@ -6,9 +6,9 @@
     </div>
 
     <div class="d-flex gap-2">
-      <button class="btn btn-outline-secondary" (click)="back()">Back</button>
+      <button class="btn btn-outline-secondary" (click)="back()">Regresar</button>
       <button class="btn btn-primary" (click)="submit()" [disabled]="saving || loading">
-        {{ isEdit ? 'Save changes' : 'Create' }}
+        {{ isEdit ? 'Guardar cambios' : 'Crear nuevo' }}
       </button>
     </div>
   </div>
@@ -27,36 +27,36 @@
   <div class="row g-3">
     <div class="col-12 col-lg-7">
       <div class="card">
-        <div class="card-header fw-semibold">Product info</div>
+        <div class="card-header fw-semibold">Información del producto</div>
         <div class="card-body">
           <form [formGroup]="form" (ngSubmit)="submit()">
             <div class="mb-3">
               <label class="form-label">SKU</label>
               <input class="form-control" formControlName="sku" />
               <div class="text-danger small mt-1" *ngIf="f.sku.touched && f.sku.invalid">
-                SKU is required (2-64 chars).
+                SKU es obligatorío (2-64 carácteres).
               </div>
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Name</label>
+              <label class="form-label">Nombre</label>
               <input class="form-control" formControlName="name" />
               <div class="text-danger small mt-1" *ngIf="f.name.touched && f.name.invalid">
-                Name is required (2-120 chars).
+                Nombre es obligatorío (2-120 carácteres).
               </div>
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Description</label>
+              <label class="form-label">Descripción</label>
               <textarea class="form-control" rows="3" formControlName="description"></textarea>
             </div>
 
             <div class="row g-2">
               <div class="col-12 col-md-6">
-                <label class="form-label">Price</label>
+                <label class="form-label">Precio</label>
                 <input type="number" class="form-control" formControlName="price" />
                 <div class="text-danger small mt-1" *ngIf="f.price.touched && f.price.invalid">
-                  Price must be >= 0
+                  Precio debe ser mayor o igual a 0
                 </div>
               </div>
 
@@ -64,12 +64,12 @@
                 <label class="form-label">Stock</label>
                 <input type="number" class="form-control" formControlName="stock" />
                 <div class="text-danger small mt-1" *ngIf="f.stock.touched && f.stock.invalid">
-                  Stock must be >= 0
+                  Stock debe ser mayor o igual a 0
                 </div>
               </div>
             </div>
 
-            <button type="submit" class="d-none">submit</button>
+            <button type="submit" class="d-none">Enviar</button>
           </form>
         </div>
       </div>
@@ -77,15 +77,15 @@
 
     <div class="col-12 col-lg-5">
       <div class="card">
-        <div class="card-header fw-semibold">Stock actions</div>
+        <div class="card-header fw-semibold">Acciones de stock</div>
         <div class="card-body">
           <div class="alert alert-secondary mb-3" *ngIf="!isEdit">
-            Create the product first to enable stock actions.
+            Crea el producto primero para habilitar las acciones de stock.
           </div>
 
           <form [formGroup]="stockForm">
             <div class="mb-3">
-              <label class="form-label">Adjust stock (delta)</label>
+              <label class="form-label">Ajustar stock</label>
               <div class="input-group">
                 <input type="number" class="form-control" formControlName="delta" [disabled]="!isEdit || stockLoading" />
                 <button class="btn btn-outline-secondary" type="button"
@@ -94,22 +94,22 @@
                   Apply
                 </button>
               </div>
-              <div class="text-muted small">Use negative to decrease, positive to increase.</div>
+              <div class="text-muted small">Usa el valor del inventario para fijar stock.</div>
             </div>
 
             <hr>
 
             <div class="mb-3">
-              <label class="form-label">Decrement stock (qty)</label>
+              <label class="form-label">Descontar stock (qty)</label>
               <div class="input-group">
                 <input type="number" class="form-control" formControlName="qty" [disabled]="!isEdit || stockLoading" />
                 <button class="btn btn-outline-danger" type="button"
                         (click)="decrementStock()"
                         [disabled]="!isEdit || stockLoading">
-                  Decrement
+                  Disminuir
                 </button>
               </div>
-              <div class="text-muted small">This should return 409 if insufficient stock.</div>
+              <div class="text-muted small">Si no hay suficiente stock, la API debe devolver 409.</div>
             </div>
           </form>
 
