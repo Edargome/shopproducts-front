@@ -1,0 +1,39 @@
+<div class="table-responsive card">
+  <table class="table table-striped align-middle m-0">
+    <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Nombre</th>
+        <th class="d-none d-md-table-cell">Descripción</th>
+        <th class="text-end">Precio</th>
+        <th class="text-end">Stock</th>
+        <th class="text-end" style="width: 220px;">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of items">
+        <td class="fw-semibold">{{ p.sku }}</td>
+        <td>{{ p.name }}</td>
+        <td class="d-none d-md-table-cell text-truncate" style="max-width: 420px;">
+          {{ p.description }}
+        </td>
+        <td class="text-end">{{ p.price | number:'1.0-0' }}</td>
+        <td class="text-end">{{ p.stock }}</td>
+        <td class="text-end">
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-outline-primary" (click)="edit.emit(p)">Editar</button>
+            <button class="btn btn-outline-secondary" (click)="adjustStock.emit(p)">Ajustar</button>
+            <button class="btn btn-outline-danger" (click)="decrementStock.emit(p)">Descontar</button>
+          </div>
+        </td>
+      </tr>
+
+      <tr *ngIf="items.length === 0">
+        <td colspan="6" class="text-center py-4 text-muted">
+          No hay resultados
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
