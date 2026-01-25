@@ -77,3 +77,9 @@
     </div>
   </div>
 </div>
+<app-stock-modal
+  [open]="stockOpen"
+  [product]="selectedProduct"
+  (close)="onCloseModal()"
+  (updated)="onProductUpdated($event)"
+></app-stock-modal>

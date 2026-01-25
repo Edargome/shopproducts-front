@@ -10,15 +10,15 @@ import {
 } from '../../../../core/services/products.service';
 
 import { ProductsTableComponent } from '../../components/products-table/products-table.component';
+import { StockModalComponent } from '../../components/stock-modal/stock-modal.component';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, ProductsTableComponent],
+  imports: [CommonModule, FormsModule, RouterModule, ProductsTableComponent, StockModalComponent],
   templateUrl: './products-list.component.html',
 })
 export class ProductsListComponent implements OnInit {
-  // UI state
   q = '';
   page = 1;
   limit = 20;
@@ -33,6 +33,9 @@ export class ProductsListComponent implements OnInit {
     limit: 20,
     pages: 1,
   };
+
+  stockOpen = false;
+  selectedProduct: Product | null = null;
 
   constructor(
     private readonly products: ProductsService,
@@ -69,20 +72,15 @@ export class ProductsListComponent implements OnInit {
     this.errorMsg = '';
 
     const term = this.q.trim();
-
     const req$ = term
       ? this.products.search(term, this.page, this.limit)
       : this.products.list(this.page, this.limit);
 
     req$.subscribe({
       next: (res) => {
-        // Aseguramos page/limit por si backend no los retorna
-        this.data = {
-          ...res,
-          page: res.page ?? this.page,
-          limit: res.limit ?? this.limit,
-          pages: res.pages ?? Math.max(1, Math.ceil((res.total ?? 0) / this.limit)),
-        };
+        this.data = res;
+        this.page = res.page;
+        this.limit = res.limit;
         this.loading = false;
       },
       error: (err) => {
@@ -94,17 +92,32 @@ export class ProductsListComponent implements OnInit {
     });
   }
 
-  // Actions from table
   onEdit(p: Product): void {
     this.router.navigate(['/products', p.id, 'edit']);
   }
 
   onAdjustStock(p: Product): void {
-    // por ahora: navegamos a edit (luego lo cambiamos a modal)
-    this.router.navigate(['/products', p.id, 'edit'], { queryParams: { tab: 'stock' } });
+    this.selectedProduct = p;
+    this.stockOpen = true;
   }
 
   onDecrementStock(p: Product): void {
-    this.router.navigate(['/products', p.id, 'edit'], { queryParams: { tab: 'stock' } });
+    this.selectedProduct = p;
+    this.stockOpen = true;
+  }
+
+  onCloseModal(): void {
+    this.stockOpen = false;
+    this.selectedProduct = null;
+  }
+
+  onProductUpdated(updated: Product): void {
+    const idx = this.data.items.findIndex((x) => x.id === updated.id);
+    if (idx >= 0) {
+      this.data = {
+        ...this.data,
+        items: this.data.items.map((x) => (x.id === updated.id ? updated : x)),
+      };
+    }
   }
 }
