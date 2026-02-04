@@ -1,13 +1,27 @@
 import { Routes } from '@angular/router';
-import { ProductsListComponent } from './features/products/pages/products-list/products-list.component';
-import { ProductFormComponent } from './features/products/pages/product-form/product-form.component';
+import { CatalogPageComponent } from './features/catalog/page/catalog-page.component';
+import { LoginPageComponent } from './features/auth/pages/login-page.component';
+import { AdminProductsPageComponent } from './features/admin/page/admin-products-page.component';
+import { ProductFormPageComponent } from './features/admin/page/product-form-page.component';
+import { AdminLayoutComponent } from './features/admin/page/admin-layout.component';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '', redirectTo: 'catalog', pathMatch: 'full' },
 
-  { path: 'products', component: ProductsListComponent },
-  { path: 'products/new', component: ProductFormComponent },
-  { path: 'products/:id/edit', component: ProductFormComponent },
+  { path: 'catalog', component: CatalogPageComponent },
+  { path: 'login', component: LoginPageComponent },
 
-  { path: '**', redirectTo: 'products' },
+  {
+    path: 'admin/products',
+    component: AdminLayoutComponent,
+    canActivate: [adminGuard],
+    children: [
+      { path: '', component: AdminProductsPageComponent },
+      { path: 'new', component: ProductFormPageComponent },
+      { path: ':id/edit', component: ProductFormPageComponent },
+    ],
+  },
+
+  { path: '**', redirectTo: 'catalog' },
 ];

@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'smartinventory-front' title`, () => {
+  it(`should have the 'shopproduct-front' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('smartinventory-front');
+    expect(app.title).toEqual('shopproduct-front');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, smartinventory-front');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, shopproduct-front');
   });
 });

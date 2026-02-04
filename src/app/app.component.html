@@ -1,1 +1,27 @@
-<router-outlet />
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/catalog">ShopProduct</a>
+
+    <div class="d-flex align-items-center gap-2 ms-auto">
+      <a class="btn btn-outline-secondary btn-sm" routerLink="/catalog">Catálogo</a>
+
+      <a *ngIf="auth.isAdmin()" class="btn btn-outline-primary btn-sm" routerLink="/admin/products">
+        Admin
+      </a>
+
+      <span *ngIf="auth.isAuthenticated()" class="small text-muted">
+        {{ auth.actor()?.email }} ({{ auth.actor()?.role }})
+      </span>
+
+      <a *ngIf="!auth.isAuthenticated()" class="btn btn-primary btn-sm" routerLink="/login">
+        Login
+      </a>
+
+      <button *ngIf="auth.isAuthenticated()" class="btn btn-outline-danger btn-sm" (click)="auth.logout()">
+        Salir
+      </button>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

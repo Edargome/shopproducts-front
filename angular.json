@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "smartinventory-front": {
+    "shopproduct-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/smartinventory-front",
+            "outputPath": "dist/shopproduct-front",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "smartinventory-front:build:production"
+              "buildTarget": "shopproduct-front:build:production"
             },
             "development": {
-              "buildTarget": "smartinventory-front:build:development"
+              "buildTarget": "shopproduct-front:build:development"
             }
           },
           "defaultConfiguration": "development"

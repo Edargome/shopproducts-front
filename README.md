@@ -1,6 +1,6 @@
-# SmartInventory - Frontend (Angular 19 independiente + Bootstrap)
+# ShopProduct - Frontend (Angular 19 independiente + Bootstrap)
 
-SPA frontend para la prueba técnica de SmartInventory. Desarrollado con las API independientes de Angular y Bootstrap para un estilo limpio y minimalista.
+SPA frontend para la prueba técnica de ShopProduct. Desarrollado con las API independientes de Angular y Bootstrap para un estilo limpio y minimalista.
 
 ## Stack Técnico
 - Angular 19.x (standalone)
@@ -44,13 +44,13 @@ export const environment = {
 ## Flujos de trabajo recomendados
 1) Iniciar backend:
 ```bash
-cd smartinventory-pro
+cd shopproduct-pro
 npm run start:dev
 ```
 
 2) Iniciar frontend:
 ```bash
-cd smartinventory-frontend
+cd shopproduct-frontend
 npm start
 ```
 
