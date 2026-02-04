@@ -36,23 +36,32 @@ export const environment = {
 
 ## Características
 - Lista de productos con paginación
+- Login de usuarios
 - Búsqueda con paginación (q, página, límite)
 - Crear/editar producto
-- Acciones de stock (ajustar/reducir) mediante un modal de Bootstrap
 - Mensajes de error fáciles de entender para 404/409
 
 ## Flujos de trabajo recomendados
 1) Iniciar backend:
 ```bash
-cd shopproduct-pro
+cd shopproduct-back
 npm run start:dev
 ```
 
 2) Iniciar frontend:
 ```bash
-cd shopproduct-frontend
+cd shopproduct-front
 npm start
 ```
+
+## Usuarios de prueba
+ADMIN:
+- usuario: admin@smartinventory.com
+- contraseña: Admin123*
+
+CUSTOMER:
+- usuario: user@test.com
+- contraseña: User12345
 
 ## Build
 ```bash
